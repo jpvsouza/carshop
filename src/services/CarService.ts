@@ -1,6 +1,7 @@
 import IService from '../interfaces/IService';
 import { IModel } from '../interfaces/IModel';
 import { carZodSchema, ICar } from '../interfaces/ICar';
+import { ErrorTypes } from '../errors/catalog';
 
 export default class CarService implements IService<ICar> {
   private _carModel: IModel<ICar>;
@@ -23,5 +24,12 @@ export default class CarService implements IService<ICar> {
   public async read(): Promise<ICar[]> {
     const allCars = this._carModel.read();
     return allCars;
+  }
+
+  public async readOne(_id: string): Promise<ICar> {
+    if (_id.length < 24) throw new Error(ErrorTypes.InvalidMongoId);
+    const car = await this._carModel.readOne(_id);
+    if (!car) throw new Error(ErrorTypes.ObjectNotFound);
+    return car;
   }
 }
