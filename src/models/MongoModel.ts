@@ -22,15 +22,18 @@ abstract class MongoModel<T> implements IModel<T> {
   }
 
   public async update(_id: string, obj: Partial<T>): Promise<T | null> {
+    console.log('Antes: ', obj);
     if (!isValidObjectId(_id)) throw new Error(ErrorTypes.ObjectNotFound);
 
     const document = await this._model
       .findByIdAndUpdate(_id, obj, { new: true });
+
+    console.log('Depois', document);
     return document;
   }
 
   public async delete(_id: string): Promise<T | null> {
-    if (!isValidObjectId(_id)) throw new Error(ErrorTypes.InvalidMongoId);
+    if (!isValidObjectId(_id)) throw new Error(ErrorTypes.ObjectNotFound);
 
     const result = await this._model.remove(_id);
     return result;

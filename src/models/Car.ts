@@ -12,6 +12,8 @@ const frameMongooseSchema = new Schema<ICar>({
   seatsQty: Number,
 });
 
+frameMongooseSchema.set('versionKey', false);
+
 class Car extends MongoModel<ICar> {
   constructor(model = mongooseCreateModel('Car', frameMongooseSchema)) {
     super(model);
