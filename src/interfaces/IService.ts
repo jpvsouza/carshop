@@ -4,5 +4,5 @@ export default interface IService<T> {
   read(): Promise<T[]>;
   readOne(_id: string): Promise<T>;
   update(_id: string, obj: Partial<T>): Promise<T | null>;
-  //   delete(_id: string): Promise<T | null>;
+  delete(_id: string): Promise<T | null>;
 }
