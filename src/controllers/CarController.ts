@@ -14,4 +14,9 @@ export default class CarController {
     // status diferente e uma mensagem também
     return res.status(201).json(result);
   }
+
+  public async read(req: Request, res:Response<ICar[]>) {
+    const allCars = await this._service.read();
+    return res.status(200).json(allCars);
+  }
 }

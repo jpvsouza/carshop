@@ -11,5 +11,6 @@ const carController = new CarController(carService);
 
 // É usado arrow function para fazer o bind do this
 router.post('/', (req, res) => carController.create(req, res));
+router.get('/', (req, res) => carController.read(req, res));
 
 export default router;

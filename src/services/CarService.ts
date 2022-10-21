@@ -19,4 +19,9 @@ export default class CarService implements IService<ICar> {
     // Caso tenha sucesso, o objeto recebido por parâmetro é enviado para a model.
     return this._carModel.create(parsed.data);
   }
+
+  public async read(): Promise<ICar[]> {
+    const allCars = this._carModel.read();
+    return allCars;
+  }
 }
