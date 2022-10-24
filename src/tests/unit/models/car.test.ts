@@ -66,4 +66,40 @@ describe('Frame Model', () => {
         stub.restore();
     })
   })
+
+  describe('getting all cars', () => {
+    it('successfully found', async () => {
+      sinon.stub(Model, 'find').resolves([carMockWithId]);
+      const carFound = await carModel.read();
+      expect(carFound).to.be.deep.equal([carMockWithId]);
+      sinon.restore();
+    });
+  });
+
+  describe('remove a car', () => {
+    it('successfully found and deleted', async () => {
+      sinon.stub(Model, 'findByIdAndDelete').resolves(carMockWithId);
+      sinon.stub(mongoose, 'isValidObjectId').resolves(true);
+
+      const carDeleted = await carModel.delete('idAleatorio');
+      expect(carDeleted).to.be.deep.equal(carMockWithId);
+      
+      sinon.restore();
+    });
+
+    it('throws InvalidMongoId with invalid id', async () => {
+      const stub = sinon.stub(mongoose, 'isValidObjectId').returns(false);
+      let error;
+
+      try {
+          await carModel.update('invalid-id', carMock)
+      } catch (err){
+          error = err;
+      }
+
+      expect(error).not.to.be.undefined;
+      expect((error as Error).message).to.be.equal('InvalidMongoId');
+      stub.restore();
+  })
+  });
 });
