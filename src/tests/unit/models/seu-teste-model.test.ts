@@ -51,6 +51,19 @@ describe('Frame Model', () => {
 
         sinon.restore();
     });
-    it('car not found', () => {});
+    it('throws InvalidMongoId with invalid id', async () => {
+        const stub = sinon.stub(mongoose, 'isValidObjectId').returns(false);
+        let error;
+
+        try {
+            await carModel.update('invalid-id', carMock)
+        } catch (err){
+            error = err;
+        }
+
+        expect(error).not.to.be.undefined;
+        expect((error as Error).message).to.be.equal('InvalidMongoId');
+        stub.restore();
+    })
   })
 });

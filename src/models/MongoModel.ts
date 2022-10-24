@@ -22,7 +22,7 @@ abstract class MongoModel<T> implements IModel<T> {
   }
 
   public async update(_id: string, obj: Partial<T>): Promise<T | null> {
-    if (!isValidObjectId(_id)) throw new Error(ErrorTypes.ObjectNotFound);
+    if (!isValidObjectId(_id)) throw new Error(ErrorTypes.InvalidMongoId);
 
     const document = await this._model
       .findByIdAndUpdate(_id, obj, { new: true });
