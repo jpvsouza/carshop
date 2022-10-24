@@ -11,7 +11,7 @@ import { carMock, carMockWithId } from '../../unit/mocks/carMock';
 describe('Frame Controller', () => {
   const carModel = new CarModel()
   const carService = new CarService(carModel);
-  const frameController = new CarController(carService);
+  const carController = new CarController(carService);
   
   const req = {} as Request; 
   const res = {} as Response;
@@ -33,7 +33,7 @@ describe('Frame Controller', () => {
     it('Success', async () => {
 
       req.body = carMock;
-      await frameController.create(req, res);
+      await carController.create(req, res);
 
       const statusStub = res.status as sinon.SinonStub;
       expect(statusStub.calledWith(201)).to.be.true;
@@ -43,25 +43,25 @@ describe('Frame Controller', () => {
     });
   });
 
-  describe('ReadOne Frame', () => {
+  describe('ReadOne Car', () => {
     beforeEach(() => {
       sinon.stub(carService, 'readOne').resolves(carMock);
     })
 
     it('Success', async () => {
       req.params = { id: carMockWithId._id };
-      await frameController.readOne(req, res);
+      await carController.readOne(req, res);
 
       expect((res.status as sinon.SinonStub).calledWith(200)).to.be.true;
       expect((res.json as sinon.SinonStub).calledWith(carMock)).to.be.true;
     });
   });
 
-  describe('Update Frame', () => {
+  describe('Update Car', () => {
     it('Success', async () => {
       sinon.stub(carService, 'update').resolves(carMockWithId)
 
-      await frameController.update(req, res)
+      await carController.update(req, res)
 
       expect((res.status as sinon.SinonStub).calledWith(200)).to.be.true;
       expect((res.json as sinon.SinonStub).calledWith(carMockWithId)).to.be.true;
