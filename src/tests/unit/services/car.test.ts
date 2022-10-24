@@ -71,11 +71,11 @@ describe('Frame Service', () => {
     });
 
     it('Failure - Zod', async () => {
-      sinon.stub(carService, 'update').resolves(carMockWithId);
+      sinon.stub(carModel, 'update').resolves(carMockWithId);
       let error;
 
       try {
-        await carService.update('any-id', { doorsQty: 1 });
+        await carService.update(carMockWithId._id, { doorsQty: 1 });
       } catch (err) {
         error = err;
       }
@@ -90,12 +90,12 @@ describe('Frame Service', () => {
       let error: any;
 
       try {
-        await carService.update('any-id', carMock);
+        await carService.update(carMockWithId._id, carMock);
       } catch (err) {
         error = err;
       }
 
-      expect(error?.message).to.be.eq(ErrorTypes.EntityNotFound);
+      expect(error?.message).to.be.eq(ErrorTypes.ObjectNotFound);
 
       sinon.restore();
     });
