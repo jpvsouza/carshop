@@ -1,6 +1,6 @@
 # Projeto Car Shop
 
-## Getting Started
+## Objetivo
 
 O objetivo desse projeto é criar uma API para gerenciar uma concessionária de veículos. Dessa forma, colocando em prática os conceitos e ferramentas apresentados no curso da Trybe.
 
@@ -15,12 +15,12 @@ O objetivo desse projeto é criar uma API para gerenciar uma concessionária de 
 ### Pre requisitos para instalação
 
 Versão do NPM necessaria: 8.x;
+
 Versão do Node necessaria: 16.x;
 
-### Instalando
+Banco de dados MongoDB 5.x rodando na porta 27017
 
-A step by step series of examples that tell you how to get a development
-environment running
+### Instalando
 
 Instale as dependencias com:
 
@@ -44,7 +44,7 @@ E para verificar a porção do código coberto de testes:
 
 ## Deployment
 
-Aqui o link depois que tiver feito deploy dele
+Ainda não foi feito deploy do projeto
 
 ## Autor
 
