@@ -1,8 +1,8 @@
 import { model as mongooseCreateModel, Schema } from 'mongoose';
-import { IMotorcyle } from '../interfaces/IMotorcycle';
+import { IMotorcycle } from '../interfaces/IMotorcycle';
 import MongoModel from './MongoModel';
 
-const motorcycleMongooseSchema = new Schema<IMotorcyle>({
+const motorcycleMongooseSchema = new Schema<IMotorcycle>({
   model: String,
   year: Number,
   color: String,
@@ -14,7 +14,7 @@ const motorcycleMongooseSchema = new Schema<IMotorcyle>({
 
 motorcycleMongooseSchema.set('versionKey', false);
 
-class Motorcycle extends MongoModel<IMotorcyle> {
+class Motorcycle extends MongoModel<IMotorcycle> {
   constructor(model = mongooseCreateModel('Motorcycle', motorcycleMongooseSchema)) {
     super(model);
   }
